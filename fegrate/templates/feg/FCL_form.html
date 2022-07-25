@@ -1,0 +1,140 @@
+{% load static %} {% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  {% include 'head.html' %}
+
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      {% include 'sidebar.html'%}
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          {% include 'topbar.html'%}
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <!-- Page Heading -->
+            <h1 class="h3 mb-4 text-gray-800">FCL</h1>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <!-- Circle Buttons -->
+                <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                      OceanFreight
+                    </h6>
+                  </div>
+                  <div class="card-body">
+                    <p>Please input numbers only. not $ or / or cbm.. etc</p>
+                    <!-- Circle Buttons (Default) -->
+                    <div class="table-responsive">
+                      <table
+                        class="table table-bordered"
+                        id="dataTable"
+                        width="100%"
+                        cellspacing="0"
+                      >
+                        <thead style="width: 100%">
+                          <tr style="width: 100px">
+                            <th style="text-align: center; width: 3%">Date</th>
+                            <th style="text-align: center; width: 3%">
+                              Effective
+                            </th>
+                            <th style="text-align: center; width: 12.5%">
+                              Carrier
+                            </th>
+                            <th style="text-align: center; width: 10%">
+                              Origin
+                            </th>
+                            <th style="text-align: center; width: 10%">
+                              Destination
+                            </th>
+                            <th style="text-align: center; width: 12.5% ; color: red;">
+                              20ft
+                            </th>
+                            <th style="text-align: center; width: 12.5% ; color: red;">
+                              40ft
+                            </th>
+                            <th style="text-align: center; width: 12.5%">
+                              frequency
+                            </th>
+                            <th style="text-align: center; width: 5%">
+                              T/time
+                            </th>
+                            
+                            <th style="text-align: center; width: 12.5%">
+                              Sc No.
+                            </th>
+                          </tr>
+                        </thead>
+                        <tfoot></tfoot>
+                        <tbody>
+                          <form action="" method="post" autocomplete="off">
+                            {% csrf_token %}
+                            <tr>
+                              <td>{{form.chk_date|as_crispy_field}}</td>
+                              <td>{{form.effective|as_crispy_field}}</td>
+                              <td>{{form.carrier|as_crispy_field}}</td>
+                              <td>{{form.origin|as_crispy_field}}</td>
+                              <td>{{form.dest|as_crispy_field}}</td>
+                              <td style="color: red;">{{form.twenty|as_crispy_field}}</td>
+                              <td style="color: red;">{{form.fourty|as_crispy_field}}</td>
+                              <td>{{form.freq|as_crispy_field}}</td>
+                              <td>{{form.ttime|as_crispy_field}}</td>
+                              
+                              <td>{{form.scno|as_crispy_field}}</td>
+                            </tr>
+                          
+                        </tbody>
+                      </table>
+                      <div><br><strong style="color: red;">Remark: </strong><br><br>{{form.remark|as_crispy_field}}</div>
+                      <button
+                        type="submit"
+                        class="btn btn-success btn-block btn-lg"
+                      >
+                        <i class="fas fa-database"></i> Submit
+                      </button>
+                      
+                      <a
+                        href="{% url 'FCL_list' %}"
+                        class="btn btn-secondary btn-block btn-lg"
+                      >
+                        <i class="fas fa-stream"></i> Back to list
+                      </a>
+                    </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+
+        {% include 'footer.html'%}
+      </div>
+      <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    {%include 'modal.html'%}
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/static/js/sb-admin-2.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/999e0851cc.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
