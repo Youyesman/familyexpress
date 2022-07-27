@@ -11,14 +11,14 @@ from users import *
 
 ###########################################################################################################
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def FCL_list(request):
     context = {'fcl_list': FCL.objects.all()}
     return render(request, "feg/FCL_list.html", context)
 
 
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def FCL_form(request, id=0):
 
     if request.method == "GET":
@@ -43,7 +43,7 @@ def FCL_form(request, id=0):
 
 
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def FCL_delete(request, id):
     fcl = FCL.objects.get(pk=id)
     fcl.delete()
@@ -53,14 +53,14 @@ def FCL_delete(request, id):
 
 
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def AIR_list(request):
     context = {'airfreight_list': Airfreight.objects.all()}
     return render(request, "feg/AIR_list.html", context)
 
 
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def AIR_form(request, id=0):
 
     if request.method == "GET":
@@ -85,7 +85,7 @@ def AIR_form(request, id=0):
 
 
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def AIR_delete(request, id):
     airfreight = Airfreight.objects.get(pk=id)
     airfreight.delete()
@@ -95,14 +95,14 @@ def AIR_delete(request, id):
 
 
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def LCL_list(request):
     context = {'lcl_list': LCL.objects.all()}
     return render(request, "feg/LCL_list.html", context)
 
 
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def LCL_form(request, id=0):
     
     if request.method == "GET":
@@ -141,7 +141,7 @@ def LCL_form(request, id=0):
     
 
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def LCL_delete(request, id):
     lcl = LCL.objects.get(pk=id)
     lcl.delete()
@@ -212,14 +212,14 @@ def searchlcl(request):
     ###################################################################################################################################
 
 @login_required(login_url='users:login')
-@staff_member_required(login_url='404.html')
+@staff_member_required(login_url='/feg/404.html')
 def Local_Air_list(request):
     context = {'Local_airfreight_list': Local_Air.objects.all()}
     return render(request, "feg/Local_AIR_list.html", context)
 
 
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def Local_AIR_form(request, id=0):
 
     if request.method == "GET":
@@ -245,7 +245,7 @@ def Local_AIR_form(request, id=0):
 
 
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def Local_AIR_delete(request, id):
     localairfreight = Local_Air.objects.get(pk=id)
     localairfreight.delete()
@@ -253,14 +253,14 @@ def Local_AIR_delete(request, id):
 
 ##############################################################
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def Local_LCL_list(request):
     context = {'Local_lcl_list': Local_Lcl.objects.all()}
     return render(request, "feg/Local_LCL_list.html", context)
 
 
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def Local_LCL_form(request, id=0):
 
     if request.method == "GET":
@@ -286,7 +286,7 @@ def Local_LCL_form(request, id=0):
 
 
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def Local_LCL_delete(request, id):
     locallcl = Local_Fcl.objects.get(pk=id)
     locallcl.delete()
@@ -295,14 +295,14 @@ def Local_LCL_delete(request, id):
 
 ##############################################################################
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def Local_FCL_list(request):
     context = {'Local_Fcl_list': Local_Fcl.objects.all()}
     return render(request, "feg/Local_FCL_list.html", context)
 
 
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def Local_FCL_form(request, id=0):
 
     if request.method == "GET":
@@ -328,7 +328,7 @@ def Local_FCL_form(request, id=0):
 
 
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def Local_FCL_delete(request, id):
     localfcl = Local_Fcl.objects.get(pk=id)
     localfcl.delete()
@@ -336,14 +336,14 @@ def Local_FCL_delete(request, id):
 
 ###########################################################################################
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def Dest_FCL_list(request):
     context = {'Dest_Fcl_list': Dest_Fcl.objects.all()}
     return render(request, "feg/Dest_FCL_list.html", context)
 
 
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def Dest_FCL_form(request, id=0):
 
     if request.method == "GET":
@@ -369,7 +369,7 @@ def Dest_FCL_form(request, id=0):
 
 
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def Dest_FCL_delete(request, id):
     destfcl = Dest_Fcl.objects.get(pk=id)
     destfcl.delete()
@@ -378,14 +378,14 @@ def Dest_FCL_delete(request, id):
 ######################################################################################
 
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def Dest_LCL_list(request):
     context = {'Dest_Lcl_list': Dest_Lcl.objects.all()}
     return render(request, "feg/Dest_LCL_list.html", context)
 
 
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def Dest_LCL_form(request, id=0):
 
     if request.method == "GET":
@@ -411,7 +411,7 @@ def Dest_LCL_form(request, id=0):
 
 
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def Dest_LCL_delete(request, id):
     destlcl = Dest_Lcl.objects.get(pk=id)
     destlcl.delete()
@@ -419,14 +419,14 @@ def Dest_LCL_delete(request, id):
 
 ##########################################################################################
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def Dest_AIR_list(request):
     context = {'Dest_Air_list': Dest_Air.objects.all()}
     return render(request, "feg/Dest_AIR_list.html", context)
 
 
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def Dest_AIR_form(request, id=0):
 
     if request.method == "GET":
@@ -452,7 +452,7 @@ def Dest_AIR_form(request, id=0):
 
 
 @login_required(login_url='users:login')
-@staff_member_required(login_url='/404.html')
+@staff_member_required(login_url='/feg/404.html')
 def Dest_AIR_delete(request, id):
     destair = Dest_Air.objects.get(pk=id)
     destair.delete()
