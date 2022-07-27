@@ -39,7 +39,7 @@ def FCL_form(request, id=0):
             user_id = request.user.pk
             form.username = User.objects.get(pk=user_id)
             form.save()
-        return redirect('/FCL_list.html')
+        return redirect('/feg/FCL_list.html')
 
 
 @login_required(login_url='users:login')
@@ -47,7 +47,7 @@ def FCL_form(request, id=0):
 def FCL_delete(request, id):
     fcl = FCL.objects.get(pk=id)
     fcl.delete()
-    return redirect('/FCL_list.html')
+    return redirect('/feg/FCL_list.html')
 
 ###########################################################################################################
 
@@ -81,7 +81,7 @@ def AIR_form(request, id=0):
             user_id = request.user.pk
             form.username = User.objects.get(pk=user_id)
             form.save()
-        return redirect('/AIR_list.html')
+        return redirect('/feg/AIR_list.html')
 
 
 @login_required(login_url='users:login')
@@ -89,7 +89,7 @@ def AIR_form(request, id=0):
 def AIR_delete(request, id):
     airfreight = Airfreight.objects.get(pk=id)
     airfreight.delete()
-    return redirect('/AIR_list.html')
+    return redirect('/feg/AIR_list.html')
 
 ###########################################################################################################
 
@@ -137,7 +137,7 @@ def LCL_form(request, id=0):
             
             
             
-        return redirect('/LCL_list.html')
+        return redirect('/feg/LCL_list.html')
     
 
 @login_required(login_url='users:login')
@@ -145,7 +145,7 @@ def LCL_form(request, id=0):
 def LCL_delete(request, id):
     lcl = LCL.objects.get(pk=id)
     lcl.delete()
-    return redirect('/LCL_list.html')
+    return redirect('/feg/LCL_list.html')
 
 #############################################################################################
 
@@ -241,7 +241,7 @@ def Local_AIR_form(request, id=0):
             user_id = request.user.pk
             form.username = User.objects.get(pk=user_id)
             form.save()
-        return redirect('/Local_AIR_list.html')
+        return redirect('/feg/Local_AIR_list.html')
 
 
 @login_required(login_url='users:login')
@@ -249,7 +249,7 @@ def Local_AIR_form(request, id=0):
 def Local_AIR_delete(request, id):
     localairfreight = Local_Air.objects.get(pk=id)
     localairfreight.delete()
-    return redirect('/Local_AIR_list.html')
+    return redirect('/feg/Local_AIR_list.html')
 
 ##############################################################
 @login_required(login_url='users:login')
@@ -282,7 +282,7 @@ def Local_LCL_form(request, id=0):
             user_id = request.user.pk
             form.username = User.objects.get(pk=user_id)
             form.save()
-        return redirect('/Local_LCL_list.html')
+        return redirect('/feg/Local_LCL_list.html')
 
 
 @login_required(login_url='users:login')
@@ -290,7 +290,7 @@ def Local_LCL_form(request, id=0):
 def Local_LCL_delete(request, id):
     locallcl = Local_Fcl.objects.get(pk=id)
     locallcl.delete()
-    return redirect('/Local_FCL_list.html')
+    return redirect('/feg/Local_LCL_list.html')
 
 
 ##############################################################################
@@ -324,7 +324,7 @@ def Local_FCL_form(request, id=0):
             user_id = request.user.pk
             form.username = User.objects.get(pk=user_id)
             form.save()
-        return redirect('/Local_FCL_list.html')
+        return redirect('/feg/Local_FCL_list.html')
 
 
 @login_required(login_url='users:login')
@@ -332,7 +332,7 @@ def Local_FCL_form(request, id=0):
 def Local_FCL_delete(request, id):
     localfcl = Local_Fcl.objects.get(pk=id)
     localfcl.delete()
-    return redirect('/Local_FCL_list.html')
+    return redirect('/feg/Local_FCL_list.html')
 
 ###########################################################################################
 @login_required(login_url='users:login')
@@ -365,7 +365,7 @@ def Dest_FCL_form(request, id=0):
             user_id = request.user.pk
             form.username = User.objects.get(pk=user_id)
             form.save()
-        return redirect('/Dest_FCL_list.html')
+        return redirect('/feg/Dest_FCL_list.html')
 
 
 @login_required(login_url='users:login')
@@ -373,7 +373,7 @@ def Dest_FCL_form(request, id=0):
 def Dest_FCL_delete(request, id):
     destfcl = Dest_Fcl.objects.get(pk=id)
     destfcl.delete()
-    return redirect('/Dest_FCL_list.html')
+    return redirect('/feg/Dest_FCL_list.html')
 
 ######################################################################################
 
@@ -407,7 +407,7 @@ def Dest_LCL_form(request, id=0):
             user_id = request.user.pk
             form.username = User.objects.get(pk=user_id)
             form.save()
-        return redirect('/Dest_LCL_list.html')
+        return redirect('/feg/Dest_LCL_list.html')
 
 
 @login_required(login_url='users:login')
@@ -415,7 +415,7 @@ def Dest_LCL_form(request, id=0):
 def Dest_LCL_delete(request, id):
     destlcl = Dest_Lcl.objects.get(pk=id)
     destlcl.delete()
-    return redirect('/Dest_LCL_list.html')
+    return redirect('/feg/Dest_LCL_list.html')
 
 ##########################################################################################
 @login_required(login_url='users:login')
@@ -448,7 +448,7 @@ def Dest_AIR_form(request, id=0):
             user_id = request.user.pk
             form.username = User.objects.get(pk=user_id)
             form.save()
-        return redirect('/Dest_AIR_list.html')
+        return redirect('/feg/Dest_AIR_list.html')
 
 
 @login_required(login_url='users:login')
@@ -456,4 +456,4 @@ def Dest_AIR_form(request, id=0):
 def Dest_AIR_delete(request, id):
     destair = Dest_Air.objects.get(pk=id)
     destair.delete()
-    return redirect('/Dest_AIR_list.html')
+    return redirect('/feg/Dest_AIR_list.html')

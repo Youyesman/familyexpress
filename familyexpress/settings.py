@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'familyexpress.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'EmployeeDB2',
+        'NAME': 'fegDB',
         'USER' : 'postgres',
-        'PASSWORD' : 'petrucci12',
+        'PASSWORD' : 'petrucci12!@',
         'HOST':'localhost',
-        'PORT':'7777'
+        'PORT':'5432'
     }
 }
 
