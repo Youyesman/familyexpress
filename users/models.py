@@ -28,7 +28,7 @@ class UserManager(BaseUserManager):
             raise ValueError('패스워드는 필수 요소입니다.')
         
         # 이메일 주소를 소문자로 변환하는 과정을 거친 뒤에 저장한다.
-        username = self.normalize_email(username) 
+        username = self.normalize_email(username)
         
         # 사용자 모델 객체를 생성한다.
         user = self.model(
@@ -58,7 +58,7 @@ class UserManager(BaseUserManager):
 
     # 일반 사용자 생성
     def create_user(self, username, password=None, **extra_fields): 
-        extra_fields['is_active'] = False
+        extra_fields['is_active'] = True
         extra_fields['is_staff'] = False
         extra_fields['is_superuser'] = False
         
@@ -95,20 +95,39 @@ class UserManager(BaseUserManager):
 # 사용자 계정 테이블 모델
 class User(AbstractBaseUser):
     id           = models.BigAutoField(primary_key=True)
-    username        = models.EmailField(max_length=254, unique=True) # 이메일 주소
+    username        = models.CharField(max_length=254, unique=True) # 이메일 주소
+    name = models.CharField(max_length=254)
     secret       = models.UUIDField(default=uuid.uuid4) # 사용자 서명용 비밀키
     status       = models.CharField(max_length=10, default=USER_STATUS.get('ACTIVE', 'ACTIVE')) # 사용자 현재 상태
-    is_active    = models.BooleanField(default=False) # 계정 활성화 여부
+    is_active    = models.BooleanField(default=True) # 계정 활성화 여부
     created_at   = models.DateTimeField(auto_now_add=True) # 계정 생성일
     updated_at   = models.DateTimeField(auto_now=True) # 계정 수정일
+    team = models.CharField(max_length=10)
+    email = models.EmailField(max_length=20)
+    is_superuser = models.BooleanField(default=False)
+    is_staff     = models.BooleanField(default=False)
+    
+
     
     objects = UserManager() # 사용자 정보를 관리하는 클래스는 지정한다.
 
     USERNAME_FIELD = 'username' # 사용자 이름으로 사용될 필드의 이름을 지정한다.
-
+    
     # 사용자 PK 값을 가져오기위한 함수
     def get_id(self):
         return self.id
+    
+    def __str__(self):
+        return self.username
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+
+    def has_module_perms(self, app_label):
+        return True
+
+    objects= UserManager()
     
 
 # 권한 테이블 모델

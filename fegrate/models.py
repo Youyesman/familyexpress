@@ -1,6 +1,6 @@
 from random import choices
 from django.db import models
-from django.contrib.auth.models import User
+from users.models import User
     
 class FCL(models.Model):
     chk_date = models.CharField(max_length=100)

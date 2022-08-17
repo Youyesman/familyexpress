@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-p3x8ja@-%_vlh3gqj^==_^b$ya_i22&=-3w^4hmr+aw!-cp)j3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -141,7 +141,7 @@ LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = '/users/login/'
 
-AUTH_USER_MODEL = 'auth.User'
+AUTH_USER_MODEL = 'users.User'
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 1200
