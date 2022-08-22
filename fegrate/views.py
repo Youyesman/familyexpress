@@ -8,6 +8,48 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from familyexpress.decorators import *
 from users import *
+from django.core.paginator import Paginator
+from . import models
+
+def posting(request,id):
+    post = Post.objects.get(pk=id)
+    return render(request, "feg/posting.html", {'post':post})
+
+def post_list(request):
+    page = request.GET.get("page")
+    posts_list = models.Post.objects.all()
+    paginator = Paginator(posts_list,10)
+    posts = paginator.get_page(page)
+    context = {'post_list': Post.objects.all(),'page':posts}
+    return render(request, "feg/post_list.html", context)
+
+def post_form(request, id=0):
+
+    if request.method == "GET":
+        if id == 0:
+            form = PostForm()
+        else:
+            post = Post.objects.get(pk=id)
+            form = PostForm(instance=post)
+        return render(request, "feg/post_form.html", {'form': form})
+    else:
+        if id == 0:
+            form = PostForm(request.POST)
+        else:
+            post = Post.objects.get(pk=id)
+            form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form = form.save(commit=False)
+            user_id = request.user.pk
+            form.username = User.objects.get(pk=user_id)
+            form.save()
+        return redirect('/feg/post_list.html')
+    
+def post_delete(request, id):
+    post = Post.objects.get(pk=id)
+    post.delete()
+    return redirect('/feg/post_list.html')
+    
 
 ###########################################################################################################
 @login_required(login_url='users:login')
@@ -158,7 +200,12 @@ def forgotpassword(request):
 
 
 def index(request):
-    return render(request, 'feg/index.html')
+    page = request.GET.get("page")
+    posts_list = models.Post.objects.all()
+    paginator = Paginator(posts_list,5)
+    posts = paginator.get_page(page)
+    context = {'post_list': Post.objects.all(),'page':posts}
+    return render(request, 'feg/index.html', context)
 
 
 def register(request):

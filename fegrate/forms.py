@@ -1,7 +1,14 @@
 from django import forms
 from .models import *
 from crispy_forms.helper import FormHelper
-       
+
+class PostForm(forms.ModelForm) :
+    class Meta:
+        model = Post
+        fileds = ('Title','Content')
+        exclude = ['username','created_at']
+
+
 class FCLForm(forms.ModelForm) :
     
     class Meta:

@@ -4,10 +4,17 @@ from fegrate.views import *
 
 urlpatterns = [
     path('feg/',views.index,name='index'),
+    path('feg/post',views.post_form,name='post_insert'),
+    path('feg/post/<int:id>',views.post_form,name='post_update'),
+    path('feg/post/delete/<int:id>',views.post_delete,name= 'post_delete'),
+    path('feg/post_list.html',views.post_list,name= 'post_list'),
+    path('feg/posting/<int:id>',views.posting,name= 'posting'),
+    
     path('feg/FCL/', views.FCL_form,name='FCL_insert'), # get and post req. for insert operation
     path('feg/FCL/<int:id>/', views.FCL_form,name='FCL_update'), # get and post req. for update operation
     path('feg/FCL/delete/<int:id>/',views.FCL_delete,name='FCL_delete'),
     path('feg/FCL_list.html',views.FCL_list,name='FCL_list'),
+    
     path('feg/LCL/', views.LCL_form,name='LCL_insert'), # get and post req. for insert operation
     path('feg/LCL/<int:id>/', views.LCL_form,name='LCL_update'), # get and post req. for update operation
     path('feg/LCL/delete/<int:id>/',views.LCL_delete,name='LCL_delete'),

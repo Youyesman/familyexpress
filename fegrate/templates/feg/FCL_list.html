@@ -1,207 +1,164 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  {% include 'head.html' %}
+{% include 'head.html' %}
 
-  <body id="page-top">
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-      {% include 'sidebar.html'%}
-      <!-- Content Wrapper -->
-      <div id="content-wrapper" class="d-flex flex-column">
-        <!-- Main Content -->
-        <div id="content">
-          {% include 'topbar.html'%}
+<body id="page-top">
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+    {% include 'sidebar.html'%}
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <!-- Main Content -->
+      <div id="content">
+        {% include 'topbar.html'%}
 
-          <!-- Begin Page Content -->
-          <div class="container-fluid">
-            <!-- Page Heading -->
-            <h1 class="h3 mb-4 text-gray-800">FCL</h1>
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+          <!-- Page Heading -->
+          <h1 class="h3 mb-4 text-gray-800">FCL</h1>
 
-            <div class="row">
-              <div class="col-lg-12">
-                <!-- Circle Buttons -->
-                <div class="card shadow mb-4">
-                  <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">
-                      OceanFreight
-                    </h6>
-                  </div>
-                  <div class="card-body">
-                    <!-- Circle Buttons (Default) -->
-                    <div class="table-responsive">
-                      <th>
-                        <div>
-                          <a href="{% url 'FCL_insert' %}">
-                            <button
-                              type="button"
-                              class="btn btn-success"
-                              style="margin-bottom: 1%; margin-top: 0.3%"
-                            >
-                              +ADD
-                            </button>
-                          </a>
-                          <a href="{% url 'FCL_list' %}">
-                            <button
-                              type="button"
-                              class="btn btn-success"
-                              style="
+          <div class="row">
+            <div class="col-lg-12">
+              <!-- Circle Buttons -->
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">
+                    OceanFreight
+                  </h6>
+                </div>
+                <div class="card-body">
+                  <!-- Circle Buttons (Default) -->
+                  <div class="table-responsive">
+                    <th>
+                      <div>
+                        <a href="{% url 'FCL_insert' %}">
+                          <button type="button" class="btn btn-success" style="margin-bottom: 1%; margin-top: 0.3%">
+                            +ADD
+                          </button>
+                        </a>
+                        <a href="{% url 'FCL_list' %}">
+                          <button type="button" class="btn btn-success" style="
                                 float: right;
                                 margin-left: 1%;
                                 margin-top: 0.3%;
-                              "
-                            >
-                              View all
-                            </button>
-                          </a>
-                          <form
-                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-                            style="float: right; margin-top: 10%"
-                            action="{% url 'search' %}"
-                            method="get"
-                          >
-                            <div class="input-group">
-                              <input
-                                type="text"
-                                class="form-control bg-light border-0 small"
-                                placeholder="Search for ... "
-                                aria-label="Search"
-                                aria-describedby="basic-addon2"
-                                name="q"
-                                value="{{ q }}"
-                                style="margin-top: 3%; margin-right: 3%"
-                              />
-                              <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">
-                                  <i class="fas fa-search fa-sm"></i>
-                                </button>
-                              </div>
+                              ">
+                            View all
+                          </button>
+                        </a>
+                        <form
+                          class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+                          style="float: right; margin-top: 10%" action="{% url 'search' %}" method="get">
+                          <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small"
+                              placeholder="Search for ... " aria-label="Search" aria-describedby="basic-addon2" name="q"
+                              value="{{ q }}" style="margin-top: 3%; margin-right: 3%" />
+                            <div class="input-group-append">
+                              <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search fa-sm"></i>
+                              </button>
                             </div>
-                          </form>
-                        </div>
-                      </th>
+                          </div>
+                        </form>
+                      </div>
+                    </th>
 
-                      <table
-                        class="table table-bordered"
-                        id="dataTable"
-                        width="100%"
-                        cellspacing="0"
-                      >
-                        <thead>
-                          <tr>
-                            <th style="text-align: center" width="13%">Date</th>
-                            <th style="text-align: center" width="7%">
-                              Origin
-                            </th>
-                            <th style="text-align: center">Dest</th>
-                            <th style="text-align: center">Carrier</th>
-                            <th style="text-align: center">20ft</th>
-                            <th style="text-align: center">40ft</th>
-                            <th style="text-align: center" width="13%">
-                              Effective
-                            </th>
-                            <th style="text-align: center" width="5%">Lastupdate</th>
-                            <th style="text-align: center" width="5%">
-                              Details
-                            </th>
-                            <th style="text-align: center" width="5%">
-                              Update
-                            </th>
-                            <th style="text-align: center" width="5%">
-                              Delete
-                            </th>
-                          </tr>
-                        </thead>
-                        <tfoot>
-                          <tr>
-                            <th style="text-align: center" width="13%">Date</th>
-                            <th style="text-align: center" width="7%">
-                              Origin
-                            </th>
-                            <th style="text-align: center">Dest</th>
-                            <th style="text-align: center">Carrier</th>
-                            <th style="text-align: center">20ft</th>
-                            <th style="text-align: center">40ft</th>
-                            <th style="text-align: center" width="13%">
-                              Effective
-                            </th>
-                            <th style="text-align: center" width="5%">Lastupdate</th>
-                            <th style="text-align: center" width="5%">
-                              Details
-                            </th>
-                            <th style="text-align: center" width="5%">
-                              Update
-                            </th>
-                            <th style="text-align: center" width="5%">
-                              Delete
-                            </th>
-                          </tr>
-                        </tfoot>
-                        <tbody>
-                          <tr>
-                            {% for fcl in fcl_list %}
-                            <td style="text-align: center">
-                              {{fcl.chk_date}}
-                            </td>
-                            </td>
-                            <td
-                              style="
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th style="text-align: center" width="13%">Date</th>
+                          <th style="text-align: center" width="7%">
+                            Origin
+                          </th>
+                          <th style="text-align: center">Dest</th>
+                          <th style="text-align: center">Carrier</th>
+                          <th style="text-align: center">20ft</th>
+                          <th style="text-align: center">40ft</th>
+                          <th style="text-align: center" width="13%">
+                            Effective
+                          </th>
+                          <th style="text-align: center" width="5%">Lastupdate</th>
+                          <th style="text-align: center" width="5%">
+                            Details
+                          </th>
+                          <th style="text-align: center" width="5%">
+                            Update
+                          </th>
+                          <th style="text-align: center" width="5%">
+                            Delete
+                          </th>
+                        </tr>
+                      </thead>
+                      <tfoot>
+                        <tr>
+                          <th style="text-align: center" width="13%">Date</th>
+                          <th style="text-align: center" width="7%">
+                            Origin
+                          </th>
+                          <th style="text-align: center">Dest</th>
+                          <th style="text-align: center">Carrier</th>
+                          <th style="text-align: center">20ft</th>
+                          <th style="text-align: center">40ft</th>
+                          <th style="text-align: center" width="13%">
+                            Effective
+                          </th>
+                          <th style="text-align: center" width="5%">Lastupdate</th>
+                          <th style="text-align: center" width="5%">
+                            Details
+                          </th>
+                          <th style="text-align: center" width="5%">
+                            Update
+                          </th>
+                          <th style="text-align: center" width="5%">
+                            Delete
+                          </th>
+                        </tr>
+                      </tfoot>
+                      <tbody>
+                        <tr>
+                          {% for fcl in fcl_list %}
+                          <td style="text-align: center">
+                            {{fcl.chk_date}}
+                          </td>
+                          </td>
+                          <td style="
                                 text-transform: uppercase;
                                 text-align: center;
-                              "
-                            >
-                              {{fcl.origin}}
-                            </td>
-                            <td
-                              style="
+                              ">
+                            {{fcl.origin}}
+                          </td>
+                          <td style="
                                 text-transform: uppercase;
                                 text-align: center;
-                              "
-                            >
-                              {{fcl.dest}}
-                            </td>
-                            <td
-                              style="
+                              ">
+                            {{fcl.dest}}
+                          </td>
+                          <td style="
                                 text-transform: uppercase;
                                 text-align: center;
-                              "
-                            >
-                              {{fcl.carrier}}
-                            </td>
-                            <td style="text-align: center ; color: red;">
-                              $<strong>{{fcl.twenty}}</strong>
-                            </td>
-                            <td style="text-align: center ; color: red;">
-                              $<strong>{{fcl.fourty}}</strong>
-                            </td>
-                            <td style="text-align: center">
-                              {{fcl.effective}}
-                            </td>
-                            <td style="text-align: center">
-                              {{fcl.username}}
-                            <div
-                              class="modal fade"
-                              id="viewdetail{{fcl.id}}"
-                              tabindex="-1"
-                              role="dialog"
-                              aria-labelledby="exampleModalLabel"
-                              aria-hidden="true"
-                            >
+                              ">
+                            {{fcl.carrier}}
+                          </td>
+                          <td style="text-align: center ; color: red;">
+                            $<strong>{{fcl.twenty}}</strong>
+                          </td>
+                          <td style="text-align: center ; color: red;">
+                            $<strong>{{fcl.fourty}}</strong>
+                          </td>
+                          <td style="text-align: center">
+                            {{fcl.effective}}
+                          </td>
+                          <td style="text-align: center">
+                            {{fcl.username}}
+                            <div class="modal fade" id="viewdetail{{fcl.id}}" tabindex="-1" role="dialog"
+                              aria-labelledby="exampleModalLabel" aria-hidden="true">
                               <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h5
-                                      class="modal-title"
-                                      id="exampleModalLabel"
-                                    >
+                                    <h5 class="modal-title" id="exampleModalLabel">
                                       Others
                                     </h5>
-                                    <button
-                                      class="close"
-                                      type="button"
-                                      data-dismiss="modal"
-                                      aria-label="Close"
-                                    >
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">×</span>
                                     </button>
                                   </div>
@@ -213,88 +170,66 @@
                                     <p>Transit Time: {{fcl.ttime}}days</p>
                                   </div>
                                   <div class="modal-footer">
-                                    <button
-                                      class="btn btn-secondary"
-                                      type="button"
-                                      data-dismiss="modal"
-                                    >
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">
                                       Cancel
                                     </button>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            <td style="text-align: center">
-                              <a
-                                class="btn btn-primary btn-circle btn-sm"
-                                data-toggle="modal"
-                                data-target="#viewdetail{{fcl.id}}"
-                              >
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                              </a>
-                            </td>
+                          <td style="text-align: center">
+                            <a class="btn btn-primary btn-circle btn-sm" data-toggle="modal"
+                              data-target="#viewdetail{{fcl.id}}">
+                              <i class="fa-solid fa-magnifying-glass"></i>
+                            </a>
+                          </td>
 
-                            <td style="text-align: center">
-                              <a href="{% url 'FCL_update' fcl.id %}">
-                                <button
-                                  type="button"
-                                  class="btn btn-warning btn-circle btn-sm"
-                                  id="update"
-                                >
-                                  <i class="fas fa-pen"></i></button
-                              ></a>
-                            </td>
+                          <td style="text-align: center">
+                            <a href="{% url 'FCL_update' fcl.id %}">
+                              <button type="button" class="btn btn-warning btn-circle btn-sm" id="update">
+                                <i class="fas fa-pen"></i></button></a>
+                          </td>
 
-                            <td style="text-align: center">
-                              <form
-                                action="{% url 'FCL_delete' fcl.id %}"
-                                method="post"
-                                class="d-inline"
-                              >
-                                {% csrf_token %}
-                                <button
-                                  type="submit"
-                                  class="btn btn-danger btn-circle btn-sm"
-                                  id="delete"
-                                >
-                                  <i class="fas fa-trash"></i>
-                                </button>
-                              </form>
-                            </td>
-                          </tr>
-                          {% endfor %}
-                        </tbody>
-                      </table>
-                    </div>
+                          <td style="text-align: center">
+                            <form action="{% url 'FCL_delete' fcl.id %}" method="post" class="d-inline">
+                              {% csrf_token %}
+                              <button type="submit" class="btn btn-danger btn-circle btn-sm" id="delete">
+                                <i class="fas fa-trash"></i>
+                              </button>
+                            </form>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- /.container-fluid -->
         </div>
-        <!-- End of Main Content -->
-
-        {% include 'footer.html'%}
+        <!-- /.container-fluid -->
       </div>
-      <!-- End of Content Wrapper -->
+      <!-- End of Main Content -->
+
+      {% include 'footer.html'%}
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Content Wrapper -->
+  </div>
+  <!-- End of Page Wrapper -->
 
-    {%include 'modal.html'%}
+  {%include 'modal.html'%}
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/static/vendor/jquery/jquery.min.js"></script>
-    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap core JavaScript-->
+  <script src="/static/vendor/jquery/jquery.min.js"></script>
+  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="/static/js/sb-admin-2.min.js"></script>
-    <script
-      src="https://kit.fontawesome.com/999e0851cc.js"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+  <!-- Custom scripts for all pages-->
+  <script src="/static/js/sb-admin-2.min.js"></script>
+  <script src="https://kit.fontawesome.com/999e0851cc.js" crossorigin="anonymous"></script>
+</body>
+
 </html>

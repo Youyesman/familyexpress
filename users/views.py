@@ -63,7 +63,7 @@ def login(request):
         # 존재하지 않는다면
         else:
             # 딕셔너리에 에러메세지를 전달하고 다시 login.html 화면으로 돌아간다.
-            return render(request, 'users/login.html', {'error': 'username or password is incorrect.'})
+            return render(request, 'users/recheck.html')
     # login으로 GET 요청이 들어왔을때, 로그인 화면을 띄워준다.
     else:
         return render(request, 'users/login.html')

@@ -1,6 +1,7 @@
 from random import choices
 from django.db import models
 from users.models import User
+from django.utils import timezone
     
 class FCL(models.Model):
     chk_date = models.CharField(max_length=100)
@@ -183,3 +184,13 @@ class Dest_Fcl(models.Model):
     
     username = models.ForeignKey(
         User, on_delete=models.CASCADE, verbose_name='작성자')
+    
+class Post(models.Model):
+    
+    Title = models.CharField(max_length=50)
+    Content = models.TextField()
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.Title
