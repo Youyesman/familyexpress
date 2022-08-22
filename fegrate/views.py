@@ -201,7 +201,7 @@ def forgotpassword(request):
 
 def index(request):
     page = request.GET.get("page")
-    posts_list = models.Post.objects.all()
+    posts_list = models.Post.objects.get_queryset().order_by('id')
     paginator = Paginator(posts_list,5)
     posts = paginator.get_page(page)
     context = {'post_list': Post.objects.all(),'page':posts}
