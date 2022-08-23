@@ -1,0 +1,157 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+{% include 'head.html' %}
+
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        {% include 'sidebar.html'%}
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                {% include 'topbar.html'%}
+
+                <!-- Begin Page Content --> 
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">Air Origin Charges</h1>
+
+                    <div class="row">
+
+                        <div class="col-lg-12">
+
+                            <!-- Circle Buttons -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">AirFreight</h6>
+                                </div>
+                                <div class="card-body">
+                                    <p>Please input numbers only. not $ or / or cbm.. etc</p>
+                                    <!-- Circle Buttons (Default) -->
+                                    <div class="table-responsive">
+
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                    <!-- <tr>
+                                                    <th>Check date</th>   
+								                    <th>Carrier</th>
+                                                    <th>Origin</th>
+                                                    <th>Destination</th>
+                                                    </tr>
+                                                    <th>20ft</th>
+                                                    <th>40ft</th>
+                                                    <th>frequency</th>
+                                                    <th>T/Time</th>
+                                                    <tr>
+                                                    <th>Effective</th>
+                                                    <th>SC No.</th>
+                                                    <th>PIC</th>
+								                    <th>Remark</th>
+                                                    </tr> -->
+
+                                            </thead>
+                                            <tfoot>
+
+                                            </tfoot>
+                                            <tbody>
+                                                {% if user.is_authenticated %}
+                                                <form action="" method="post" autocomplete="off">
+                                                    {% csrf_token %}
+                                                    <div style="width: 100%;">
+                                                    </div>
+                                                    
+                                                    <table class="table table-bordered" id="dataTable" width="50%" cellspacing="0">
+                                                        <thead style="width: 100%;">
+                                                            <tr style="width: 100px;">
+                                                                <th style="text-align: center; width: 15%">Branch</th>
+                                                                <th style="text-align: center; width: 15%">PORT</th>
+                                                                <th style="text-align: center; width: 15%">HDC</th>
+                                                                <th style="text-align: center; width: 15%">CLC</th>           
+                                                                <th style="text-align: center; width: 15%">DOC</th>
+                                                                <th style="text-align: center; width: 15%">THC</th>
+                                                                
+                                                            </tr>
+                                                        </thead>
+                                                        <tfoot>
+                                                            
+                                                        </tfoot>
+                                                        <tbody>
+                                                            <td>{{form.Loc_branch|as_crispy_field}}</td>
+                                                            <td>{{form.Loc_port|as_crispy_field}}</td>
+                                                            <td><div style="float: left; width:45%;">{{form.Loc_Air_Hdc|as_crispy_field}}</div> <div style="float: right; width:50%">{{form.Loc_Air_Hdcunit|as_crispy_field}}</div></td>
+                                                            <td><div style="float: left; width:45%;">{{form.Loc_Air_Clc|as_crispy_field}}</div> <div style="float: right; width:50%">{{form.Loc_Air_Clcunit|as_crispy_field}}</div></td>
+                                                            <td><div style="float: left; width:45%;">{{form.Loc_Air_Doc|as_crispy_field}}</div> <div style="float: right; width:50%">{{form.Loc_Air_Docunit|as_crispy_field}}</div></td>
+                                                            <td><div style="float: left; width:45%;">{{form.Loc_Air_Thc|as_crispy_field}}</div> <div style="float: right; width:50%">{{form.Loc_Air_Thcunit|as_crispy_field}}</div></td>
+                                                            
+                                                        </tbody>
+                                                        </table>
+
+                                                        Other Charges : <td>{{form.Loc_Air_Otc|as_crispy_field}}</td>
+                                                        Remark : <td>{{form.Loc_Air_Remark|as_crispy_field}}</td>
+                                                        
+                                                        <td>
+                                                                
+
+
+                                                            <button type="submit" class="btn btn-success btn-block btn-lg"><i class="fas fa-database"></i>
+                                                                Submit</button>
+                                                            <a href="{% url 'Local_AIR_list' %}" class="btn btn-secondary btn-block btn-lg">
+                                                                <i class="fas fa-stream"></i> Back to list
+                                                            </a>
+                                                        </td>
+                                                </form>
+                                                
+                                                {%else%}
+                                                
+                                                <h1>로그인 해주세요</h1>
+                                                {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>                           
+
+                        </div>
+
+                    
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            {% include 'footer.html'%}
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    {%include 'modal.html'%}
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/static/js/sb-admin-2.min.js"></script>
+    <script src="https://kit.fontawesome.com/999e0851cc.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

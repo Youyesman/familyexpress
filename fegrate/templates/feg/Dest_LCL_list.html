@@ -1,0 +1,204 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% include 'head.html' %}
+
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        {% include 'sidebar.html'%}
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                {% include 'topbar.html'%}
+
+                <!-- Begin Page Content --> 
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">LCL Destination charges</h1>
+
+                    <div class="row">
+
+                        <div class="col-lg-12">
+
+                            <!-- Circle Buttons -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-warning">LCL Destination charges</h6>
+                                </div>
+                                <div class="card-body">
+                                    
+                                    <!-- Circle Buttons (Default) -->
+                                    <div class="table-responsive">
+                                        <th>
+                                            <div>
+                                                <a href="{% url 'Dest_LCL_insert' %}" >
+                                                    <button type="button" class="btn btn-success" style= "margin-bottom: 1%; margin-top: 0.3%">+ADD</button>
+                                                </a>
+                                                <!-- <a href="{% url 'Dest_LCL_list' %}" >
+                                                    <button type="button" class="btn btn-success" style= "float: right; margin-left: 1%; margin-top: 0.3%">View all</button>
+                                                </a>
+                                                <form
+                                                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" style="float: right; margin-top: 10%;"
+                                                action="{% url 'searchair' %}" method="get">
+                                                <div class="input-group" >
+                                                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for ..."
+                                                        aria-label="Search" aria-describedby="basic-addon2" name="q" value="{{ q }}" style="margin-top: 3%;margin-right: 3%;">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-primary" type="submit" style="margin-top: 10%;margin-right: 3%;">
+                                                            <i class="fas fa-search fa-sm"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                </form> -->
+                                            </div>
+                                        </th>
+                                        {% for destlcl in Dest_Lcl_list %}
+
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                                            <thead>
+                                                <th colspan="3" style="text-align: center; ">Branch</th>
+                                                <th colspan="2" style="text-align: center; ">PORT</th>
+                                                <th style="text-align: center; ">Remark</th>
+                                                <th style="text-align: center; ">Update</th>
+                                                <th style="text-align: center; ">Delete</th>
+                                                <th style="text-align: center; ">Lastupdate</th>
+                                            </thead>
+                                            <tbody>
+                                                <td colspan="3" style="text-align: center; text-transform : uppercase">{{destlcl.Dest_branch}}</td>
+                                                <td colspan="2" style="text-align: center; text-transform : uppercase ;color : blue ; font-weight: bold">{{destlcl.Dest_port}}</td>
+                                                
+                                                <div class="modal fade" id="viewdetail{{Destlcl.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Remark</h5>
+                                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>{{destlcl.Dest_Lcl_Remark}}</p>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                <td style="text-align: center;"><a class="btn btn-primary btn-circle btn-sm" data-toggle="modal" data-target="#viewdetail{{Destlcl.id}}">
+                                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                                    
+                                                </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                                <td style="text-align: center;">
+                                                <a href="{% url 'Dest_LCL_update' destlcl.id %}">
+                                                    <button type="button" class="btn btn-warning btn-circle btn-sm " id = "update" >
+                                                        <i class="fas fa-pen"></i>
+                                                        </button></a>
+                                                </td>
+                                                
+                                                <td style="text-align: center;">
+                                                <form action="{% url 'Dest_LCL_delete' destlcl.id %}" method="post" class="d-inline">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-danger btn-circle btn-sm"  id = "delete" >
+                                                        <i class="fas fa-trash"></i>
+                                                    </button></form>
+                                                </td>
+                                                <td style="text-align: center;">{{destlcl.username}}</td> 
+                                                
+                                              </tr>
+                                            </tbody>
+                                                <thead>
+                                                    <tr>
+                                                        
+                                                        <th style="text-align: center; ">BAF</th>
+                                                        <th style="text-align: center; ">CAF</th>           
+                                                        <th style="text-align: center; ">DRC</th>
+                                                        <th style="text-align: center; ">CCC</th>
+                                                        <th style="text-align: center; ">THC</th>
+                                                        <th style="text-align: center; ">CLC</th>
+                                                        <th style="text-align: center; ">WHC</th>
+                                                        <th style="text-align: center; ">DOC</th>
+                                                        <th style="text-align: center; ">HDC</th>
+                                                        
+                                                        
+                                                    
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                <td style="text-align: center;">$<strong>{{destlcl.Dest_Lcl_Baf}}</strong>/{{destlcl.Dest_Lcl_Bafunit}}</td>
+                                                <td style="text-align: center;">$<strong>{{destlcl.Dest_Lcl_Caf}}</strong>/{{destlcl.Dest_Lcl_Cafunit}}</td>                
+                                                <td style="text-align: center;">$<strong>{{destlcl.Dest_Lcl_Drc}}</strong>/{{destlcl.Dest_Lcl_Drcunit}}</td>                                                
+                                                <td style="text-align: center;">$<strong>{{destlcl.Dest_Lcl_Ccc}}</strong>/{{destlcl.Dest_Lcl_Cccunit}}</td>
+                                                <td style="text-align: center;">$<strong>{{destlcl.Dest_Lcl_Thc}}</strong>/{{destlcl.Dest_Lcl_Thcunit}}</td>
+                                                <td style="text-align: center;"><strong>{{destlcl.Dest_Lcl_Clc}}</strong></td>
+                                                <td style="text-align: center;">$<strong>{{destlcl.Dest_Lcl_Whc}}</strong>/{{destlcl.Dest_Lcl_Whcunit}}</td>
+                                                <td style="text-align: center;"><strong>{{destlcl.Dest_Lcl_Doc}}</strong></td>
+                                                <td style="text-align: center;"><strong>{{destlcl.Dest_Lcl_Hdc}}</strong></td>
+                                                </tbody>
+
+                                                <thead><th colspan="9" style="text-align: center; width : 100%">OTC</th></thead>
+                                                <tbody><td colspan="9" style="text-align: center;">{{destlcl.Dest_Lcl_Otc}}</td></tbody>
+                                            
+                                        
+                                                 
+
+                                        </table>
+                                        <br>
+                                        <hr style="height:2px;border:none;color:#333;background-color:#333;">
+                                        <br>
+                                        {% endfor %}  
+                                    </div>
+                                </div>
+                            </div>                           
+
+                        </div>
+
+                    
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            {% include 'footer.html'%}
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    {%include 'modal.html'%}
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/static/js/sb-admin-2.min.js"></script>
+    <script src="https://kit.fontawesome.com/999e0851cc.js" crossorigin="anonymous"></script>
+
+</body>
+
+
+</html>
