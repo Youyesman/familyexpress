@@ -50,9 +50,10 @@
                           class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
                           style="float: right; margin-top: 10%" action="{% url 'search' %}" method="get">
                           <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small"
+                            <input type="text" class="form-control form-control-sm"
                               placeholder="Search for ... " aria-label="Search" aria-describedby="basic-addon2" name="q"
                               value="{{ q }}" style="margin-top: 3%; margin-right: 3%" />
+  
                             <div class="input-group-append">
                               <button class="btn btn-primary" type="submit">
                                 <i class="fas fa-search fa-sm"></i>

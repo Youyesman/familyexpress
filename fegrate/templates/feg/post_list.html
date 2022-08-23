@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 {% include 'head.html' %}
@@ -26,6 +27,7 @@
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Board</h1>
 
+
                     <div class="row">
 
                         <div class="col-lg-12">
@@ -33,58 +35,71 @@
                             <!-- Circle Buttons -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Board</h6>
+
+                                    <div style="float: right;"><a href="{% url 'post_insert' %}"><button type="button"
+                                                class="btn btn-success">New</button></a></div>
                                 </div>
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered"  width="90%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th style="text-align: center;">No.</th>
                                             <th style="text-align: center; width: 50%">Title</th>
                                             <th style="text-align: center;">Writer</th>
                                             <th style="text-align: center;">Created at</th>
+                                            <th style="text-align: center;">Update</th>
+                                            <th style="text-align: center;">Delete</th>
+                                            
                                         </tr>
                                     </thead>
-                                    <tbody>                                          
+                                    <tbody>
                                         <tr>
-                                        {% for post in page.object_list %}
-                                        <tr>
-                                        <td style="text-align: center;">{{post.id}}</td>
-                                        <td style="text-align: center;"><a href="{%url 'posting' post.id %}">{{post.Title}}</a></td>
-                                        <td style="text-align: center;">{{post.username}}</td>
-                                        <td style="text-align: center;">{{post.created_at}}</td>
-                                        
-                                        
-                                    </div>
-     
-                                        <td style="text-align: center;">
-                                        <form action="{% url 'post_delete' post.id %}" method="post" class="d-inline">
-                                            {% csrf_token %}
-                                            <button type="submit" class="btn btn-danger btn-circle btn-sm"  id = "delete" >
-                                                <i class="fas fa-trash"></i>
-                                            </button></form>
-                                        </td>
+                                            {% for post in page.object_list %}
+
+                                            <td style="text-align: center;">{{post.id}}</td>
+                                            <td style="text-align: center;"><a
+                                                    href="{%url 'posting' post.id %}">{{post.Title}}</a></td>
+                                            <td style="text-align: center;">{{post.username}}</td>
+                                            <td style="text-align: center;">{{post.created_at}}</td>
+                                            <td style="text-align: center">
+                                                <a href="{% url 'post_update' post.id %}">
+                                                  <button type="button" class="btn btn-warning btn-circle btn-sm" id="update">
+                                                    <i class="fas fa-pen"></i></button></a>
+                                              </td>
+                                            <td style="text-align: center;">
+                                                <form action="{% url 'post_delete' post.id %}" method="post"
+                                                    class="d-inline">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-danger btn-circle btn-sm"
+                                                        id="delete">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                            
+                                        </tr>
                                     </tbody>
                                     {% endfor %}
-                                    
+
                                 </table>
-                                <div class="card-body">
 
-                                    
+                                <br>
 
-                                    <button><a href="{% url 'post_insert' %}">New</a></button>
-                                    <ul class="pagination">
-                                        {% if page.has_previous %}
-                                        <a href="?page={{page.previous_page_number}}">Prev</a>
-                                        {% endif %}
-                                        Page {{page.number}} of {{page.paginator.num_pages}}
-                                        {% if page.has_next %}
-                                        <a href="?page={{page.next_page_number}}">Next</a>
-                                        {% endif %}
-                                    </ul>
-
-
-
+                                <div style="display: flex;">
+                                    <div style="margin: auto;">
+                                        <ul class="pagination">
+                                            {% if page.has_previous %}
+                                            <a href="?page={{page.previous_page_number}}">Prev &nbsp </a>
+                                            {% endif %}
+                                            <p>Page {{page.number}} of {{page.paginator.num_pages}}</p> 
+                                            {% if page.has_next %}
+                                            <a href="?page={{page.next_page_number}}"> &nbsp Next</a>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
                                 </div>
+
+
+
                             </div>
 
                         </div>

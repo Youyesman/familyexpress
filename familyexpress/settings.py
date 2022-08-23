@@ -56,7 +56,9 @@ INSTALLED_APPS = [
     'fegrate',
     'crispy_forms',
     'users',
-    'bootstrap4'
+    'bootstrap4',
+    'widget_tweaks',
+    
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

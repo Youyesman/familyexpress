@@ -11,44 +11,60 @@ from users import *
 from django.core.paginator import Paginator
 from . import models
 
+@login_required(login_url='users:login')
+@staff_member_required(login_url='/feg/404.html')
 def posting(request,id):
     post = Post.objects.get(pk=id)
     return render(request, "feg/posting.html", {'post':post})
 
+@login_required(login_url='users:login')
+@staff_member_required(login_url='/feg/404.html')
 def post_list(request):
     page = request.GET.get("page")
-    posts_list = models.Post.objects.all()
+    posts_list = models.Post.objects.get_queryset().order_by('-id')
     paginator = Paginator(posts_list,10)
     posts = paginator.get_page(page)
     context = {'post_list': Post.objects.all(),'page':posts}
     return render(request, "feg/post_list.html", context)
 
+@login_required(login_url='users:login')
+@staff_member_required(login_url='/feg/404.html')
 def post_form(request, id=0):
+    post = Post.objects.get(pk=id)
 
     if request.method == "GET":
         if id == 0:
             form = PostForm()
-        else:
-            post = Post.objects.get(pk=id)
+        elif post.username.id == request.user.pk:
+            post = Post.objects.get(pk=id)            
             form = PostForm(instance=post)
-        return render(request, "feg/post_form.html", {'form': form})
+            return render(request, "feg/post_form.html", {'form': form})
+        else:
+           return redirect('/feg/404.html')
     else:
         if id == 0:
             form = PostForm(request.POST)
-        else:
-            post = Post.objects.get(pk=id)
+        elif post.username.id == request.user.pk:
+            post = Post.objects.get(pk=id)     
             form = PostForm(request.POST, instance=post)
+        else:
+           return redirect('/feg/404.html')    
         if form.is_valid():
             form = form.save(commit=False)
             user_id = request.user.pk
             form.username = User.objects.get(pk=user_id)
             form.save()
         return redirect('/feg/post_list.html')
-    
+
+@login_required(login_url='users:login')
+@staff_member_required(login_url='/feg/404.html')    
 def post_delete(request, id):
     post = Post.objects.get(pk=id)
-    post.delete()
-    return redirect('/feg/post_list.html')
+    if post.username.id == request.user.pk:
+        post.delete()
+        return redirect('/feg/post_list.html')
+    else:
+        return redirect('/feg/404.html') 
     
 
 ###########################################################################################################
@@ -201,7 +217,7 @@ def forgotpassword(request):
 
 def index(request):
     page = request.GET.get("page")
-    posts_list = models.Post.objects.get_queryset().order_by('id')
+    posts_list = models.Post.objects.get_queryset().order_by('-id')
     paginator = Paginator(posts_list,5)
     posts = paginator.get_page(page)
     context = {'post_list': Post.objects.all(),'page':posts}

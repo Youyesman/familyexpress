@@ -1,4 +1,5 @@
 {% load static %}
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="en">
 {% include 'head.html' %}
@@ -19,12 +20,12 @@
 
                 {% include 'topbar.html'%}
 
-                <!-- Begin Page Content --> 
+                <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    
+
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">글쓰기 페이지임</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Board</h1>
 
                     <div class="row">
 
@@ -33,22 +34,21 @@
                             <!-- Circle Buttons -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">글쓰기 페이지</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Board</h6>
                                 </div>
-                                <form method="POST">
+                                <form method="POST" enctype="multipart/form-data">
                                     {% csrf_token %}
-                                    제목<br>
-                                    {{form.Title}}
-                                    <br>
-                                    내용<br>
-                                    {{form.Content}}<br>
-                                    <input type="submit" value = "글쓰기">
+                                    {{form.Title|add_class:"title"|attr:"placeholder: Input Title"|add_error_class:"error"}}
+                                    {{form.Content|add_class:"title"|attr:"placeholder: Input Content"|add_error_class:"error"}}
+                                    <button type="submit" class="btn btn-success btn-block btn-lg" style="width : 20% ;margin:1%">
+                                        <i class="fas fa-database"></i> Submit
+                                    </button>
                                 </form>
-                            </div>                           
+                            </div>
 
                         </div>
 
-                    
+
                     </div>
 
                 </div>
@@ -68,7 +68,7 @@
     {%include 'modal.html'%}
 
 
-    
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="/static/vendor/jquery/jquery.min.js"></script>
