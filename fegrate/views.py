@@ -30,30 +30,42 @@ def post_list(request):
 @login_required(login_url='users:login')
 @staff_member_required(login_url='/feg/404.html')
 def post_form(request, id=0):
-    post = Post.objects.get(pk=id)
+    
 
     if request.method == "GET":
         if id == 0:
             form = PostForm()
-        elif post.username.id == request.user.pk:
-            post = Post.objects.get(pk=id)            
-            form = PostForm(instance=post)
-            return render(request, "feg/post_form.html", {'form': form})
         else:
-           return redirect('/feg/404.html')
+            post = Post.objects.get(pk=id)
+            user_id = request.user.pk
+            if post.username == User.objects.get(pk=user_id):
+                post = Post.objects.get(pk=id)            
+                form = PostForm(instance=post)
+            else:
+                return redirect('/feg/404.html')
+        return render(request, "feg/post_form.html", {'form': form})
+                
     else:
         if id == 0:
             form = PostForm(request.POST)
-        elif post.username.id == request.user.pk:
-            post = Post.objects.get(pk=id)     
-            form = PostForm(request.POST, instance=post)
+            if form.is_valid():
+                form = form.save(commit=False)
+                user_id = request.user.pk
+                form.username = User.objects.get(pk=user_id)
+                form.save()
         else:
-           return redirect('/feg/404.html')    
-        if form.is_valid():
-            form = form.save(commit=False)
+            post = Post.objects.get(pk=id)
             user_id = request.user.pk
-            form.username = User.objects.get(pk=user_id)
-            form.save()
+            if post.username == User.objects.get(pk=user_id):
+                post = Post.objects.get(pk=id)     
+                form = PostForm(request.POST, instance=post)
+            if form.is_valid():
+                form = form.save(commit=False)
+                user_id = request.user.pk
+                form.username = User.objects.get(pk=user_id)
+                form.save()
+            else:
+                return redirect('/feg/404.html')
         return redirect('/feg/post_list.html')
 
 @login_required(login_url='users:login')
@@ -65,7 +77,6 @@ def post_delete(request, id):
         return redirect('/feg/post_list.html')
     else:
         return redirect('/feg/404.html') 
-    
 
 ###########################################################################################################
 @login_required(login_url='users:login')
